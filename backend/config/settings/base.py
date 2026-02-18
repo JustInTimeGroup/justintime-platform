@@ -63,6 +63,7 @@ DATABASES = {
     )
 }
 
+AUTH_USER_MODEL = "accounts.User"
 
 # Static & media
 STATIC_URL = "static/"
