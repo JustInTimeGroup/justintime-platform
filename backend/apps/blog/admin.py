@@ -1,3 +1,12 @@
 from django.contrib import admin
 
-# Register your models here.
+from .models import Post
+
+
+@admin.register(Post)
+class PostAdmin(admin.ModelAdmin):
+    list_display = ("title", "status", "published_at", "created_at")
+    list_filter = ("status", "created_at")
+    search_fields = ("title", "excerpt", "content")
+    prepopulated_fields = {"slug": ("title",)}
+    readonly_fields = ("created_at",)
