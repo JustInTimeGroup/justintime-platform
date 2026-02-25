@@ -61,6 +61,8 @@
         {% if form.message.errors %}<div class="error">{{ form.message.errors|striptags }}</div>{% endif %}
       </div>
 
+      {{ form.honeypot }}
+
       <button class="btn btn--primary" type="submit" style="width:100%;">Send message</button>
 
       <div class="small">

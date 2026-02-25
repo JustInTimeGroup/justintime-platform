@@ -1,6 +1,6 @@
 from django.urls import path
 
-from .views import AboutView, ContactView, ContactThanksView, HomeView, PortalHomeView, ServicesView
+from .views import AboutView, ContactView, ContactThanksView, HomeView, PortalHomeView, ServicesView, NewsletterSignupView, NewsletterThanksView
 
 urlpatterns = [
     path("", HomeView.as_view(), name="home"),
@@ -8,5 +8,7 @@ urlpatterns = [
     path("services/", ServicesView.as_view(), name="services"),
     path("contact/", ContactView.as_view(), name="contact"),
     path("contact/thanks/", ContactThanksView.as_view(), name="contact_thanks"),
+    path("newsletter/", NewsletterSignupView.as_view(), name="newsletter_signup"),
+    path("newsletter/thanks/", NewsletterThanksView.as_view(), name="newsletter_thanks"),
     path("portal/", PortalHomeView.as_view(), name="portal_home"),
 ]

@@ -53,6 +53,7 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
+                "apps.core.context_processors.newsletter_form",
             ],
         },
     },
@@ -106,4 +107,14 @@ RECRUITMENT_NOTIFY_EMAIL = os.environ.get(
 TRAINING_NOTIFY_EMAIL = os.environ.get(
     "TRAINING_NOTIFY_EMAIL", 
     "training@justintime.local",
+)
+
+LEADS_NOTIFY_EMAIL = os.environ.get(
+    "LEADS_NOTIFY_EMAIL", 
+    "leads@justintime.local"
+)
+
+CONTACT_NOTIFY_EMAIL = os.environ.get(
+    "CONTACT_NOTIFY_EMAIL", 
+    "contact@justintime.local"
 )
