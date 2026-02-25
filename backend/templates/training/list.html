@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+{% block title %}Training | Justintime Group{% endblock %}
+
+{% block meta %}
+  <meta name="description" content="Browse training programs and register online.">
+  <link rel="canonical" href="/training/">
+{% endblock %}
+
+{% block content %}
+<header class="stack" style="max-width: 75ch;">
+  <h1 class="h1" style="font-size: var(--text-2xl);">Training</h1>
+  <p class="p">Professional training programs with simple online registration.</p>
+</header>
+
+<section class="section" style="padding-top: var(--s-10);">
+  {% if trainings %}
+    <div class="stack">
+      {% for t in trainings %}
+        <article class="card card-pad">
+          <div class="stack">
+            <div style="display:flex; gap:12px; flex-wrap:wrap; align-items:center;">
+              <div style="font-weight:900;">{{ t.title }}</div>
+
+              {% if t.location %}
+                <span class="small" style="padding:6px 10px; border-radius:999px; border:1px solid var(--border);">
+                  {{ t.location }}
+                </span>
+              {% endif %}
+
+              {% if t.duration_label %}
+                <span class="small" style="padding:6px 10px; border-radius:999px; background: rgba(18,104,176,0.08); color: var(--primary); font-weight: 800;">
+                  {{ t.duration_label }}
+                </span>
+              {% endif %}
+            </div>
+
+            <div class="small">
+              {% if t.start_date %}<strong>Starts:</strong> {{ t.start_date|date:"j M Y" }}{% endif %}
+              {% if t.end_date %}<span style="margin-left:10px;"><strong>Ends:</strong> {{ t.end_date|date:"j M Y" }}</span>{% endif %}
+            </div>
+
+            {% if t.summary %}
+              <div class="small">{{ t.summary }}</div>
+            {% endif %}
+
+            <div style="display:flex; gap:12px; flex-wrap:wrap;">
+              <a class="btn btn--outline" href="{% url 'training:detail' slug=t.slug %}">View details</a>
+              <a class="btn btn--primary" href="{% url 'training:register' slug=t.slug %}">Register</a>
+            </div>
+          </div>
+        </article>
+      {% endfor %}
+    </div>
+
+    {% if is_paginated %}
+      <div class="section" style="padding-top: var(--s-8); padding-bottom: 0;">
+        <div style="display:flex; gap: 12px; flex-wrap: wrap; align-items:center;">
+          {% if page_obj.has_previous %}
+            <a class="btn btn--outline" href="?page={{ page_obj.previous_page_number }}">Previous</a>
+          {% endif %}
+          <div class="small">Page <strong>{{ page_obj.number }}</strong> of <strong>{{ page_obj.paginator.num_pages }}</strong></div>
+          {% if page_obj.has_next %}
+            <a class="btn btn--outline" href="?page={{ page_obj.next_page_number }}">Next</a>
+          {% endif %}
+        </div>
+      </div>
+    {% endif %}
+  {% else %}
+    <div class="card card-pad">
+      <div class="stack">
+        <div style="font-weight:900;">No training currently listed</div>
+        <div class="small">Check back soon for upcoming programs.</div>
+      </div>
+    </div>
+  {% endif %}
+</section>
+{% endblock %}

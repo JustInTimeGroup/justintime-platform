@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+{% block title %}Contact | Justintime Group{% endblock %}
+
+{% block content %}
+<div class="grid-2">
+  <section class="card card-pad">
+    <div class="stack">
+      <h1 class="h1" style="font-size: var(--text-2xl);">Contact</h1>
+      <p class="p">Send us a message and our team will respond promptly.</p>
+
+      <div class="card" style="border-radius: var(--r-md); background: rgba(18,104,176,0.08); border-color: transparent; box-shadow: none;">
+        <div class="card-pad">
+          <div style="font-weight:700; color: var(--primary); font-size: var(--text-sm);">What happens next?</div>
+          <ul class="small" style="margin-top: var(--s-2); padding-left: 0;">
+            <li>We review your enquiry</li>
+            <li>We assign it to the right team</li>
+            <li>We respond with clear next steps</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="card" style="border-radius: var(--r-md); background: rgba(250,182,21,0.20); border-color: transparent; box-shadow: none;">
+        <div class="card-pad">
+          <div style="font-weight:700; font-size: var(--text-sm);">For urgent matters</div>
+          <div class="small">Use the form and include your phone number so we can reach you faster.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="card card-pad">
+    <form method="post" class="stack">
+      {% csrf_token %}
+
+      <div>
+        <label class="label">Full name</label>
+        <div class="field">{{ form.full_name }}</div>
+        {% if form.full_name.errors %}<div class="error">{{ form.full_name.errors|striptags }}</div>{% endif %}
+      </div>
+
+      <div>
+        <label class="label">Email</label>
+        <div class="field">{{ form.email }}</div>
+        {% if form.email.errors %}<div class="error">{{ form.email.errors|striptags }}</div>{% endif %}
+      </div>
+
+      <div class="grid-2">
+        <div>
+          <label class="label">Phone (optional)</label>
+          <div class="field">{{ form.phone }}</div>
+        </div>
+        <div>
+          <label class="label">Subject (optional)</label>
+          <div class="field">{{ form.subject }}</div>
+        </div>
+      </div>
+
+      <div>
+        <label class="label">Message</label>
+        <div class="field">{{ form.message }}</div>
+        {% if form.message.errors %}<div class="error">{{ form.message.errors|striptags }}</div>{% endif %}
+      </div>
+
+      {{ form.honeypot }}
+
+      <button class="btn btn--primary" type="submit" style="width:100%;">Send message</button>
+
+      <div class="small">
+        By submitting, you agree that we may contact you about your enquiry.
+      </div>
+    </form>
+  </section>
+</div>
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}Subscribed | Justintime Group{% endblock %}
+
+{% block content %}
+<section class="card card-pad" style="max-width: 780px; margin: 0 auto;">
+  <div class="stack">
+    <div style="display:flex; align-items:center; gap: 12px;">
+      <div style="width:44px; height:44px; border-radius: var(--r-md); background: rgba(18,104,176,0.10); color: var(--primary); display:flex; align-items:center; justify-content:center; font-weight: 900;">
+        ✓
+      </div>
+      <div>
+        <h1 class="h1" style="font-size: var(--text-2xl); margin: 0;">You’re subscribed</h1>
+        <p class="small" style="margin: 0;">Thanks — we’ll share updates as they’re published.</p>
+      </div>
+    </div>
+
+    <div style="display:flex; gap: 12px; flex-wrap: wrap;">
+      <a class="btn btn--primary" href="/">Back to Home</a>
+      <a class="btn btn--outline" href="/blog/">Read the Blog</a>
+    </div>
+  </div>
+</section>
+{% endblock %}

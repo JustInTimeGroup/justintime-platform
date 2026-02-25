@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block title %}Home | Justintime Group{% endblock %}
+
+{% block content %}
+<section class="card card-pad">
+  <div class="stack" style="max-width: 70ch;">
+    <div style="display:inline-flex; align-items:center; gap:10px; padding: 8px 14px; border-radius: 999px; background: rgba(250,182,21,0.20); font-size: var(--text-sm); font-weight: 600;">
+      <span style="width:10px; height:10px; border-radius:999px; background: var(--accent); display:inline-block;"></span>
+      Trusted services with UK credibility
+    </div>
+
+    <h1 class="h1">Healthcare, Training, Travel & Resourcing — delivered professionally.</h1>
+
+    <p class="p">
+      A corporate platform built to support partners, employers, and individuals with quality service and reliable operations.
+    </p>
+
+    <div style="display:flex; gap:12px; flex-wrap:wrap;">
+      <a class="btn btn--primary" href="/contact/">Contact Us</a>
+      <a class="btn btn--outline" href="/services/">Explore Services</a>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="padding-top: var(--s-10);">
+  <div class="grid-2">
+    <div class="card card-pad">
+      <div class="stack">
+        <div style="width:44px; height:44px; border-radius: var(--r-md); background: rgba(18,104,176,0.10); color: var(--primary); display:flex; align-items:center; justify-content:center; font-weight:700;">H</div>
+        <h2 class="h2" style="font-size: var(--text-xl);">Healthcare & Resourcing</h2>
+        <p class="small">Care services and staffing support for care homes and healthcare agencies.</p>
+        <a href="/services/" style="color: var(--primary); font-weight: 600;">Learn more →</a>
+      </div>
+    </div>
+
+    <div class="card card-pad">
+      <div class="stack">
+        <div style="width:44px; height:44px; border-radius: var(--r-md); background: rgba(250,182,21,0.20); color: var(--fg); display:flex; align-items:center; justify-content:center; font-weight:700;">T</div>
+        <h2 class="h2" style="font-size: var(--text-xl);">Training</h2>
+        <p class="small">Structured training and registration with a payment-ready foundation.</p>
+        <a href="/training/" style="color: var(--primary); font-weight: 600;">View training →</a>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

@@ -31,3 +31,8 @@ jobs:
 
       - name: Bandit security scan
         run: bandit -q -r .
+
+      - name: Pytest
+        env:
+          DJANGO_SETTINGS_MODULE: config.settings.dev
+        run: pytest -q

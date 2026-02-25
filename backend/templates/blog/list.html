@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+{% block title %}Blog | Justintime Group{% endblock %}
+
+{% block meta %}
+  <meta name="description" content="Updates, insights, and resources from Justintime Group across healthcare, training, travel, and resourcing.">
+  <link rel="canonical" href="/blog/">
+{% endblock %}
+
+{% block content %}
+<header class="stack" style="max-width: 75ch;">
+  <h1 class="h1" style="font-size: var(--text-2xl);">Blog</h1>
+  <p class="p">Updates, insights, and resources across our service lines.</p>
+</header>
+
+<section class="section" style="padding-top: var(--s-10);">
+  {% if posts %}
+    <div class="grid-2">
+      {% for post in posts %}
+        <article class="card card-pad">
+          <div class="stack">
+            <div class="small">
+              {% if post.published_at %}{{ post.published_at|date:"j M Y" }}{% endif %}
+            </div>
+
+            <h2 class="h2" style="font-size: var(--text-xl); margin:0;">
+              <a href="{% url 'blog:detail' slug=post.slug %}" style="text-decoration:none;">
+                {{ post.title }}
+              </a>
+            </h2>
+
+            {% if post.excerpt %}
+              <p class="small" style="max-width: 70ch;">{{ post.excerpt }}</p>
+            {% else %}
+              {% if post.content %}
+                <p class="small" style="max-width: 70ch;">{{ post.content|striptags|truncatechars:160 }}</p>
+              {% elif post.body %}
+                <p class="small" style="max-width: 70ch;">{{ post.body|striptags|truncatechars:160 }}</p>
+              {% endif %}
+            {% endif %}
+
+            <div>
+              <a class="btn btn--outline" href="{% url 'blog:detail' slug=post.slug %}">
+                Read more
+              </a>
+            </div>
+          </div>
+        </article>
+      {% endfor %}
+    </div>
+
+    <!-- Pagination -->
+    {% if is_paginated %}
+      <div class="section" style="padding-top: var(--s-8); padding-bottom: 0;">
+        <div style="display:flex; gap: 12px; flex-wrap: wrap; align-items:center;">
+          {% if page_obj.has_previous %}
+            <a class="btn btn--outline" href="?page={{ page_obj.previous_page_number }}">Previous</a>
+          {% endif %}
+
+          <div class="small">
+            Page <strong>{{ page_obj.number }}</strong> of <strong>{{ page_obj.paginator.num_pages }}</strong>
+          </div>
+
+          {% if page_obj.has_next %}
+            <a class="btn btn--outline" href="?page={{ page_obj.next_page_number }}">Next</a>
+          {% endif %}
+        </div>
+      </div>
+    {% endif %}
+  {% else %}
+    <div class="card card-pad">
+      <div class="stack">
+        <div style="font-weight:800;">No posts yet</div>
+        <div class="small">When posts are published, they’ll appear here.</div>
+      </div>
+    </div>
+  {% endif %}
+</section>
+{% endblock %}

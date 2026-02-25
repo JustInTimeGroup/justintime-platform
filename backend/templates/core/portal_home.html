@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+{% block title %}Staff Portal | Justintime Group{% endblock %}
+
+{% block content %}
+<section class="card card-pad">
+  <div class="stack">
+    <div style="display:flex; align-items:flex-start; justify-content:space-between; gap: var(--s-6); flex-wrap: wrap;">
+      <div class="stack" style="max-width: 70ch;">
+        <h1 class="h1" style="font-size: var(--text-2xl);">Staff Portal</h1>
+        <div class="small">
+          Signed in as <strong>{{ request.user.email }}</strong>
+          <span style="color: var(--muted);">• Role:</span>
+          <strong style="color: var(--primary);">{{ request.user.role }}</strong>
+        </div>
+        <p class="p">
+          Use the portal to manage enquiries, recruitment applications, training registrations, and site content.
+        </p>
+      </div>
+
+      <div style="display:flex; gap: 12px; flex-wrap: wrap;">
+        <a class="btn btn--outline" href="/accounts/logout/">Logout</a>
+        <a class="btn btn--primary" href="/admin/">Admin</a>
+      </div>
+    </div>
+
+    <div class="grid-2" style="margin-top: var(--s-6);">
+      <div class="card card-pad" style="box-shadow:none;">
+        <div class="stack">
+          <div style="font-weight:700; color: var(--primary); font-size: var(--text-sm);">Leads</div>
+          <div style="font-weight:700;">Contact enquiries & newsletter</div>
+          <div class="small">Review and manage incoming enquiries from the website.</div>
+          <a href="/admin/leads/contactlead/" style="color: var(--primary); font-weight: 600;">Open leads →</a>
+        </div>
+      </div>
+
+      <div class="card card-pad" style="box-shadow:none;">
+        <div class="stack">
+          <div style="font-weight:700; color: var(--primary); font-size: var(--text-sm);">Recruitment</div>
+          <div style="font-weight:700;">Jobs & applications</div>
+          <div class="small">Manage job postings and review CV submissions.</div>
+          <a href="/admin/recruitment/job/" style="color: var(--primary); font-weight: 600;">Open recruitment →</a>
+        </div>
+      </div>
+
+      <div class="card card-pad" style="box-shadow:none;">
+        <div class="stack">
+          <div style="font-weight:700; color: var(--primary); font-size: var(--text-sm);">Training</div>
+          <div style="font-weight:700;">Training listings & registrations</div>
+          <div class="small">Manage training programs and attendees.</div>
+          <a href="/admin/training/training/" style="color: var(--primary); font-weight: 600;">Open training →</a>
+        </div>
+      </div>
+
+      <div class="card card-pad" style="box-shadow:none;">
+        <div class="stack">
+          <div style="font-weight:700; color: var(--primary); font-size: var(--text-sm);">Content</div>
+          <div style="font-weight:700;">Blog & updates</div>
+          <div class="small">Create and publish SEO blog posts.</div>
+          <a href="/admin/blog/post/" style="color: var(--primary); font-weight: 600;">Open blog →</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" style="border-radius: var(--r-md); background: rgba(250,182,21,0.20); border-color: transparent; box-shadow: none;">
+      <div class="card-pad" style="padding: var(--s-6);">
+        <div style="font-weight:700; font-size: var(--text-sm);">Access control note</div>
+        <div class="small">
+          Permissions will be enforced per role in upcoming phases (Recruitment, Training, Marketing). If you can see something you
+          shouldn’t, tell the admin to update your role/group.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

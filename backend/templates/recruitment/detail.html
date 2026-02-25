@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% block title %}{{ job.title }} | Careers | Justintime Group{% endblock %}
+
+{% block meta %}
+  <meta name="description" content="Apply for {{ job.title }} at Justintime Group.">
+  <link rel="canonical" href="/careers/{{ job.slug }}/">
+{% endblock %}
+
+{% block content %}
+<section class="card card-pad" style="max-width: 980px; margin: 0 auto;">
+  <div class="stack">
+    <a href="/careers/" class="small" style="color: var(--primary); font-weight: 700;">← Back to Careers</a>
+
+    <header class="stack">
+      <div style="display:flex; gap:12px; flex-wrap:wrap; align-items:center;">
+        <h1 class="h1" style="font-size: var(--text-2xl); margin:0;">{{ job.title }}</h1>
+        {% if job.job_type %}
+          <span class="small" style="padding: 6px 10px; border-radius: 999px; background: rgba(18,104,176,0.08); color: var(--primary); font-weight: 700;">
+            {{ job.job_type }}
+          </span>
+        {% endif %}
+      </div>
+
+      <div class="small">
+        {% if job.location %}<strong>Location:</strong> {{ job.location }}{% endif %}
+        {% if job.department %}<span style="margin-left:10px;"><strong>Department:</strong> {{ job.department }}</span>{% endif %}
+      </div>
+
+      <div>
+        <a class="btn btn--primary" href="{% url 'recruitment:apply' slug=job.slug %}">Apply for this role</a>
+      </div>
+    </header>
+
+    <hr style="border:none; border-top:1px solid var(--border); margin: var(--s-6) 0;">
+
+    <div class="prose">
+      <h2>Role overview</h2>
+      <p>{{ job.description|linebreaksbr }}</p>
+
+      {% if job.requirements %}
+        <h2>Requirements</h2>
+        <p>{{ job.requirements|linebreaksbr }}</p>
+      {% endif %}
+    </div>
+
+    <div class="card" style="border-radius: var(--r-md); background: rgba(250,182,21,0.20); border-color: transparent; box-shadow: none;">
+      <div class="card-pad" style="padding: var(--s-6);">
+        <div style="font-weight: 800; font-size: var(--text-sm);">Secure application</div>
+        <div class="small">Upload a PDF/DOC/DOCX CV (max 5MB). Your submission will be reviewed by our recruitment team.</div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

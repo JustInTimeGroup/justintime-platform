@@ -1,0 +1,381 @@
+/* =========================
+   Layout
+========================= */
+.container {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 0 var(--s-4);
+}
+
+.section { padding: var(--s-10) 0; }
+
+.stack > * + * { margin-top: var(--s-4); }
+
+.grid-2 {
+  display: grid;
+  gap: var(--s-6);
+}
+@media (min-width: 900px) {
+  .grid-2 { grid-template-columns: 1fr 1fr; }
+}
+
+/* Responsive helpers (safe defaults: block on desktop) */
+.hide-mobile { display: none !important; }
+.hide-desktop { display: block !important; }
+@media (min-width: 900px) {
+  .hide-mobile { display: block !important; }
+  .hide-desktop { display: none !important; }
+}
+
+/* =========================
+   Surfaces
+========================= */
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  box-shadow: var(--shadow-sm);
+}
+.card-pad { padding: var(--s-8); }
+
+/* =========================
+   Topbar + Header
+========================= */
+.topbar {
+  background: var(--primary);
+  color: #fff;
+  font-size: var(--text-sm);
+}
+.topbar__inner {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--s-4);
+  padding: var(--s-2) 0;
+}
+
+/* Sticky header with blur (Safari-safe fallback) */
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  background: rgba(255, 255, 255, 0.92);
+  border-bottom: 1px solid var(--border);
+}
+@supports ((-webkit-backdrop-filter: blur(10px)) or (backdrop-filter: blur(10px))) {
+  .header {
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+  }
+}
+
+.header__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--s-4) 0;
+  gap: var(--s-4);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+}
+.brand__mark {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--r-md);
+  background: var(--primary);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+}
+
+.nav {
+  display: none;
+  gap: var(--s-6);
+  font-size: var(--text-sm);
+  color: var(--muted);
+  align-items: center;
+}
+.nav a:hover {
+  color: var(--fg);
+  text-decoration: none;
+}
+@media (min-width: 900px) {
+  .nav { display: flex; }
+}
+
+/* =========================
+   Buttons
+========================= */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 18px;
+  border-radius: var(--r-md);
+  border: 1px solid transparent;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform .06s ease, opacity .15s ease, background-color .15s ease, border-color .15s ease, box-shadow .15s ease;
+  user-select: none;
+}
+.btn:active { transform: translateY(1px); }
+
+.btn--primary {
+  background: var(--primary);
+  color: #fff;
+  box-shadow: var(--shadow-sm);
+}
+.btn--primary:hover { opacity: 0.95; text-decoration: none; }
+
+.btn--outline {
+  background: #fff;
+  color: var(--fg);
+  border-color: var(--border);
+  box-shadow: var(--shadow-sm);
+}
+.btn--outline:hover { background: #f8fafc; text-decoration: none; }
+
+.btn:focus {
+  outline: none;
+  box-shadow: var(--focus);
+  border-color: var(--primary);
+}
+
+/* =========================
+   Typography blocks
+========================= */
+.h1 {
+  font-size: var(--text-3xl);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+.h2 {
+  font-size: var(--text-2xl);
+  font-weight: 800;
+  letter-spacing: -0.015em;
+}
+.p {
+  color: var(--muted);
+  font-size: var(--text-lg);
+}
+.small {
+  font-size: var(--text-sm);
+  color: var(--muted);
+}
+
+/* =========================
+   Forms
+========================= */
+.label {
+  font-size: var(--text-sm);
+  font-weight: 700;
+  color: #1f2937;
+  display: block;
+}
+
+.field { margin-top: var(--s-2); }
+
+.input,
+.textarea {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: var(--r-md);
+  border: 1px solid var(--border);
+  background: #fff;
+  box-shadow: var(--shadow-sm);
+  outline: none;
+
+  /* iOS Safari: prevent zoom on focus by keeping >=16px font */
+  font-size: 16px;
+}
+
+.textarea {
+  min-height: 140px;
+  resize: vertical;
+}
+
+.input:focus,
+.textarea:focus {
+  border-color: var(--primary);
+  box-shadow: var(--focus);
+}
+
+.error {
+  color: #b91c1c;
+  font-size: var(--text-sm);
+  margin-top: var(--s-2);
+}
+
+/* =========================
+   Mobile Menu (JS-controlled)
+   - Robust overlay click close
+   - iOS Safari scroll lock support
+========================= */
+
+/* Hide hamburger on desktop */
+.mobile-menu { display: inline-flex; align-items: center; }
+@media (min-width: 900px) { .mobile-menu { display: none; } }
+
+.mobile-menu__button {
+  cursor: pointer;
+  user-select: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: var(--r-md);
+  border: 1px solid var(--border);
+  background: #fff;
+  box-shadow: var(--shadow-sm);
+}
+.mobile-menu__button:focus {
+  outline: none;
+  box-shadow: var(--focus);
+  border-color: var(--primary);
+}
+
+/* Hamburger icon */
+.hamburger {
+  width: 18px;
+  height: 12px;
+  position: relative;
+  display: inline-block;
+}
+.hamburger span {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--fg);
+  border-radius: 2px;
+  transition: transform .18s ease, top .18s ease, opacity .18s ease;
+}
+.hamburger span:nth-child(1) { top: 0; }
+.hamburger span:nth-child(2) { top: 5px; }
+.hamburger span:nth-child(3) { top: 10px; }
+
+/* Overlay */
+.mobile-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.40);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .18s ease;
+  z-index: 90;
+}
+
+/* Drawer */
+.mobile-drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100vh; /* fallback */
+  height: 100dvh; /* better on modern mobile */
+  width: min(86vw, 360px);
+  background: #fff;
+  border-left: 1px solid var(--border);
+  box-shadow: -12px 0 40px rgba(15, 23, 42, 0.18);
+  padding: var(--s-6);
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  gap: var(--s-6);
+
+  transform: translateX(100%);
+  transition: transform .22s ease;
+  z-index: 100;
+  overflow: auto; /* allow drawer content scroll */
+  -webkit-overflow-scrolling: touch; /* iOS smooth scroll */
+}
+
+/* Drawer header */
+.mobile-drawer__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-4);
+}
+.mobile-drawer__title { font-weight: 900; }
+
+/* Links */
+.mobile-drawer__links a {
+  display: block;
+  padding: 12px 10px;
+  border-radius: var(--r-md);
+  color: var(--fg);
+  font-weight: 800;
+}
+.mobile-drawer__links a:hover {
+  background: rgba(18, 104, 176, 0.08);
+  text-decoration: none;
+}
+.mobile-drawer__links a:focus {
+  outline: none;
+  box-shadow: var(--focus);
+}
+
+/* CTA */
+.mobile-drawer__cta { display: grid; gap: var(--s-3); }
+
+/* Open state toggled by JS on <html> */
+.menu-open .mobile-overlay {
+  opacity: 1;
+  pointer-events: auto;
+}
+.menu-open .mobile-drawer {
+  transform: translateX(0);
+}
+
+/* Animate hamburger to X */
+.menu-open .hamburger span:nth-child(1) { top: 5px; transform: rotate(45deg); }
+.menu-open .hamburger span:nth-child(2) { opacity: 0; }
+.menu-open .hamburger span:nth-child(3) { top: 5px; transform: rotate(-45deg); }
+
+/* Scroll lock (simple + safe) */
+.no-scroll {
+  overflow: hidden;
+  height: 100%;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .mobile-overlay,
+  .mobile-drawer,
+  .hamburger span,
+  .btn {
+    transition: none !important;
+  }
+}
+
+/* =========================
+   Footer
+========================= */
+.footer {
+  border-top: 1px solid var(--border);
+  margin-top: var(--s-12);
+}
+.footer__inner {
+  padding: var(--s-10) 0;
+  display: grid;
+  gap: var(--s-8);
+}
+@media (min-width: 900px) {
+  .footer__inner { grid-template-columns: 1.2fr 1fr 1fr; }
+}
+
+
+/* Blog/content typography (safe defaults) */
+.prose { max-width: 80ch; }
+.prose h2 { margin-top: var(--s-8); font-size: var(--text-xl); font-weight: 800; }
+.prose h3 { margin-top: var(--s-6); font-size: var(--text-lg); font-weight: 800; }
+.prose p { margin-top: var(--s-4); color: var(--fg); }
+.prose ul { margin-top: var(--s-4); padding-left: 18px; color: var(--fg); }
+.prose li { margin-top: 8px; }
+.prose a { color: var(--primary); font-weight: 700; }
+.prose a:hover { text-decoration: underline; }

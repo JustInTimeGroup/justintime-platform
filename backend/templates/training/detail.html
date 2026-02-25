@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% block title %}{{ training.title }} | Training | Justintime Group{% endblock %}
+
+{% block meta %}
+  <meta name="description" content="Training details and registration: {{ training.title }}.">
+  <link rel="canonical" href="/training/{{ training.slug }}/">
+{% endblock %}
+
+{% block content %}
+<section class="card card-pad" style="max-width: 980px; margin: 0 auto;">
+  <div class="stack">
+    <a href="/training/" class="small" style="color: var(--primary); font-weight: 800;">← Back to Training</a>
+
+    <header class="stack">
+      <h1 class="h1" style="font-size: var(--text-2xl); margin:0;">{{ training.title }}</h1>
+
+      <div class="small">
+        {% if training.location %}<strong>Location:</strong> {{ training.location }}{% endif %}
+        {% if training.duration_label %}<span style="margin-left:10px;"><strong>Duration:</strong> {{ training.duration_label }}</span>{% endif %}
+      </div>
+
+      <div class="small">
+        {% if training.start_date %}<strong>Start:</strong> {{ training.start_date|date:"j M Y" }}{% endif %}
+        {% if training.end_date %}<span style="margin-left:10px;"><strong>End:</strong> {{ training.end_date|date:"j M Y" }}</span>{% endif %}
+      </div>
+
+      <div style="display:flex; gap:12px; flex-wrap:wrap;">
+        <a class="btn btn--primary" href="{% url 'training:register' slug=training.slug %}">Register</a>
+        {% if training.payments_enabled and training.price_amount %}
+          <span class="small" style="padding:6px 10px; border-radius:999px; background: rgba(250,182,21,0.25); font-weight:800;">
+            {{ training.currency }} {{ training.price_amount }}
+          </span>
+        {% endif %}
+      </div>
+    </header>
+
+    <hr style="border:none; border-top:1px solid var(--border); margin: var(--s-6) 0;">
+
+    <article class="prose">
+      {% if training.summary %}
+        <p><strong>{{ training.summary }}</strong></p>
+      {% endif %}
+      <p>{{ training.description|linebreaksbr }}</p>
+    </article>
+
+    <div class="card" style="border-radius: var(--r-md); background: rgba(18,104,176,0.08); border-color: transparent; box-shadow: none;">
+      <div class="card-pad" style="padding: var(--s-6);">
+        <div style="font-weight: 900; color: var(--primary); font-size: var(--text-sm);">Payment-ready structure</div>
+        <div class="small">Payments can be enabled later without redesigning the registration flow.</div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}
