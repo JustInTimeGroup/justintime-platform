@@ -1,0 +1,44 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.pytest_cache/
+.ruff_cache/
+*.so
+*.egg-info/
+dist/
+build/
+
+# Env
+.env
+.env.*
+*.env
+.venv/
+venv/
+ENV/
+env/
+
+# OS / IDE
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Django
+*.sqlite3
+staticfiles/
+media/
+local_settings.py
+
+# Node (later for Tailwind toolchain)
+node_modules/
+dist/
+
+# Logs
+*.log
+
+# Tooling caches
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/

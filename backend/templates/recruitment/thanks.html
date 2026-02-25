@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title %}Application Received | Justintime Group{% endblock %}
+
+{% block content %}
+<section class="card card-pad" style="max-width: 780px; margin: 0 auto;">
+  <div class="stack">
+    <div style="display:flex; align-items:center; gap: 12px;">
+      <div style="width:44px; height:44px; border-radius: var(--r-md); background: rgba(18,104,176,0.10); color: var(--primary); display:flex; align-items:center; justify-content:center; font-weight: 900;">
+        ✓
+      </div>
+      <div>
+        <h1 class="h1" style="font-size: var(--text-2xl); margin: 0;">Application received</h1>
+        <p class="small" style="margin: 0;">Thank you. Our recruitment team will review your submission.</p>
+      </div>
+    </div>
+
+    <div class="card" style="border-radius: var(--r-md); background: rgba(250,182,21,0.20); border-color: transparent; box-shadow: none;">
+      <div class="card-pad" style="padding: var(--s-6);">
+        <div style="font-weight: 800; font-size: var(--text-sm);">What happens next?</div>
+        <div class="small">If shortlisted, we will contact you using the email you provided.</div>
+      </div>
+    </div>
+
+    <div style="display:flex; gap: 12px; flex-wrap: wrap;">
+      <a class="btn btn--primary" href="/careers/">Back to Careers</a>
+      <a class="btn btn--outline" href="/">Back to Home</a>
+    </div>
+  </div>
+</section>
+{% endblock %}

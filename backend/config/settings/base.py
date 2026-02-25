@@ -1,8 +1,12 @@
 import dj_database_url
 from pathlib import Path
+from dotenv import load_dotenv
 import os
 
-BASE_DIR = Path(__file__).resolve().parents[3]
+BASE_DIR = Path(__file__).resolve().parents[4]  # .../justintime-platform
+BACKEND_DIR = BASE_DIR / "justintime-platform" / "backend"
+
+load_dotenv(BASE_DIR / ".env")
 
 SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY", "dev-only-change-me")
 DEBUG = os.environ.get("DJANGO_DEBUG", "0") == "1"
@@ -18,7 +22,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
 
     # Domain apps
-    "apps.accounts",
+    "apps.accounts.apps.AccountsConfig",
     "apps.core",
     "apps.leads",
     "apps.recruitment",
@@ -40,8 +44,8 @@ ROOT_URLCONF = "config.urls"
 
 TEMPLATES = [
     {
+        "DIRS": [BACKEND_DIR / "templates"],
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [BASE_DIR / "backend" / "templates"],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -66,9 +70,13 @@ DATABASES = {
 AUTH_USER_MODEL = "accounts.User"
 
 # Static & media
-STATIC_URL = "static/"
+STATIC_URL = "/static/"
+STATICFILES_DIRS = [
+    BACKEND_DIR / "static",
+]
 STATIC_ROOT = os.environ.get("STATIC_ROOT", str(BASE_DIR / "staticfiles"))
-MEDIA_URL = "media/"
+
+MEDIA_URL = "/media/"
 MEDIA_ROOT = os.environ.get("MEDIA_ROOT", str(BASE_DIR / "media"))
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
@@ -80,3 +88,22 @@ LOGGING = {
     "handlers": {"console": {"class": "logging.StreamHandler"}},
     "root": {"handlers": ["console"], "level": "INFO"},
 }
+
+LOGIN_URL = "/accounts/login/"
+LOGIN_REDIRECT_URL = "/portal/"
+LOGOUT_REDIRECT_URL = "/"
+
+DEFAULT_FROM_EMAIL = os.environ.get(
+    "DEFAULT_FROM_EMAIL",
+    "no-reply@justintime.local",
+)
+
+RECRUITMENT_NOTIFY_EMAIL = os.environ.get(
+    "RECRUITMENT_NOTIFY_EMAIL",
+    "hr@justintime.local",
+)
+
+TRAINING_NOTIFY_EMAIL = os.environ.get(
+    "TRAINING_NOTIFY_EMAIL", 
+    "training@justintime.local",
+)

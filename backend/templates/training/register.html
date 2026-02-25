@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% block title %}Register — {{ training.title }} | Justintime Group{% endblock %}
+
+{% block meta %}
+  <meta name="description" content="Register for {{ training.title }}.">
+  <link rel="canonical" href="/training/{{ training.slug }}/register/">
+{% endblock %}
+
+{% block content %}
+<div class="grid-2">
+  <section class="card card-pad">
+    <div class="stack">
+      <a href="{% url 'training:detail' slug=training.slug %}" class="small" style="color: var(--primary); font-weight: 800;">← Back to training</a>
+      <h1 class="h1" style="font-size: var(--text-2xl);">Register</h1>
+      <div style="font-weight:900;">{{ training.title }}</div>
+
+      <div class="small">
+        {% if training.location %}{{ training.location }}{% endif %}
+        {% if training.duration_label %}<span style="margin-left:10px;">• {{ training.duration_label }}</span>{% endif %}
+      </div>
+
+      <div class="card" style="border-radius: var(--r-md); background: rgba(250,182,21,0.20); border-color: transparent; box-shadow: none;">
+        <div class="card-pad" style="padding: var(--s-6);">
+          <div style="font-weight:900; font-size: var(--text-sm);">Registration note</div>
+          <div class="small">After registration, you’ll receive a confirmation email.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="card card-pad">
+    <form method="post" class="stack">
+      {% csrf_token %}
+
+      <div>
+        <label class="label">Full name</label>
+        <div class="field">{{ form.full_name }}</div>
+        {% if form.full_name.errors %}<div class="error">{{ form.full_name.errors|striptags }}</div>{% endif %}
+      </div>
+
+      <div>
+        <label class="label">Email</label>
+        <div class="field">{{ form.email }}</div>
+        {% if form.email.errors %}<div class="error">{{ form.email.errors|striptags }}</div>{% endif %}
+      </div>
+
+      <div>
+        <label class="label">Phone (optional)</label>
+        <div class="field">{{ form.phone }}</div>
+        {% if form.phone.errors %}<div class="error">{{ form.phone.errors|striptags }}</div>{% endif %}
+      </div>
+
+      <div>
+        <label class="label">Organisation (optional)</label>
+        <div class="field">{{ form.organisation }}</div>
+        {% if form.organisation.errors %}<div class="error">{{ form.organisation.errors|striptags }}</div>{% endif %}
+      </div>
+
+      <button class="btn btn--primary" type="submit" style="width:100%;">Submit registration</button>
+
+      <div class="small">We’ll contact you with next steps and scheduling details.</div>
+    </form>
+  </section>
+</div>
+{% endblock %}

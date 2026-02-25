@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block title %}{{ post.title }} | Blog | Justintime Group{% endblock %}
+
+{% block meta %}
+  {% if post.excerpt %}
+    <meta name="description" content="{{ post.excerpt|striptags|truncatechars:160 }}">
+  {% endif %}
+  <link rel="canonical" href="/blog/{{ post.slug }}/">
+{% endblock %}
+
+{% block content %}
+<section class="card card-pad" style="max-width: 900px; margin: 0 auto;">
+  <div class="stack">
+    <a href="/blog/" class="small" style="color: var(--primary); font-weight: 700;">← Back to Blog</a>
+
+    <header class="stack">
+      <h1 class="h1" style="font-size: var(--text-2xl); margin: 0;">{{ post.title }}</h1>
+
+      <div class="small">
+        {% if post.published_at %}{{ post.published_at|date:"j M Y" }}{% endif %}
+      </div>
+
+      {% if post.excerpt %}
+        <p class="p" style="margin:0;">{{ post.excerpt }}</p>
+      {% endif %}
+    </header>
+
+    <hr style="border:none; border-top:1px solid var(--border); margin: var(--s-6) 0;">
+
+    <article class="prose">
+      {% if post.content %}
+        {{ post.content|safe }}
+      {% elif post.body %}
+        {{ post.body|safe }}
+      {% else %}
+        <p class="small">Content not available.</p>
+      {% endif %}
+    </article>
+  </div>
+</section>
+{% endblock %}

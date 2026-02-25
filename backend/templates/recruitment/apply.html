@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+{% block title %}Apply — {{ job.title }} | Justintime Group{% endblock %}
+
+{% block meta %}
+  <meta name="description" content="Apply for {{ job.title }} at Justintime Group. Upload your CV securely.">
+  <link rel="canonical" href="/careers/{{ job.slug }}/apply/">
+{% endblock %}
+
+{% block content %}
+<div class="grid-2">
+  <section class="card card-pad">
+    <div class="stack">
+      <a href="{% url 'recruitment:detail' slug=job.slug %}" class="small" style="color: var(--primary); font-weight: 700;">← Back to role</a>
+      <h1 class="h1" style="font-size: var(--text-2xl);">Apply</h1>
+      <div style="font-weight:800;">{{ job.title }}</div>
+      <div class="small">
+        {% if job.location %}{{ job.location }}{% endif %}
+        {% if job.job_type %}<span style="margin-left:10px;">• {{ job.job_type }}</span>{% endif %}
+      </div>
+
+      <div class="card" style="border-radius: var(--r-md); background: rgba(18,104,176,0.08); border-color: transparent; box-shadow: none;">
+        <div class="card-pad" style="padding: var(--s-6);">
+          <div style="font-weight:800; color: var(--primary); font-size: var(--text-sm);">CV upload guidance</div>
+          <div class="small">Allowed formats: PDF, DOC, DOCX • Maximum size: 5MB.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="card card-pad">
+    <form method="post" enctype="multipart/form-data" class="stack">
+      {% csrf_token %}
+
+      <div>
+        <label class="label">Full name</label>
+        <div class="field">{{ form.full_name }}</div>
+        {% if form.full_name.errors %}<div class="error">{{ form.full_name.errors|striptags }}</div>{% endif %}
+      </div>
+
+      <div>
+        <label class="label">Email</label>
+        <div class="field">{{ form.email }}</div>
+        {% if form.email.errors %}<div class="error">{{ form.email.errors|striptags }}</div>{% endif %}
+      </div>
+
+      <div>
+        <label class="label">Phone (optional)</label>
+        <div class="field">{{ form.phone }}</div>
+        {% if form.phone.errors %}<div class="error">{{ form.phone.errors|striptags }}</div>{% endif %}
+      </div>
+
+      <div>
+        <label class="label">Cover letter (optional)</label>
+        <div class="field">{{ form.cover_letter }}</div>
+        {% if form.cover_letter.errors %}<div class="error">{{ form.cover_letter.errors|striptags }}</div>{% endif %}
+      </div>
+
+      <div>
+        <label class="label">CV (PDF/DOC/DOCX, max 5MB)</label>
+        <div class="field">
+          <input type="file" name="cv" class="input" accept=".pdf,.doc,.docx">
+        </div>
+        {% if form.cv.errors %}<div class="error">{{ form.cv.errors|striptags }}</div>{% endif %}
+      </div>
+
+      <button class="btn btn--primary" type="submit" style="width:100%;">Submit application</button>
+
+      <div class="small">
+        By submitting, you confirm your information is accurate and you consent to recruitment review.
+      </div>
+    </form>
+  </section>
+</div>
+{% endblock %}

@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+{% block title %}About | Justintime Group{% endblock %}
+
+{% block content %}
+<header class="stack" style="max-width: 75ch;">
+  <h1 class="h1" style="font-size: var(--text-2xl);">About Us</h1>
+  <p class="p">
+    Justintime Group delivers trusted services across healthcare, workforce resourcing, professional training, and travel logistics —
+    backed by strong governance and a human-first approach.
+  </p>
+</header>
+
+<section class="section" style="padding-top: var(--s-10);">
+  <div class="grid-2">
+    <div class="card card-pad">
+      <div class="stack">
+        <div style="font-weight:700; color: var(--primary); font-size: var(--text-sm);">Our Mission</div>
+        <div style="font-weight:700;">Deliver reliable services that people can trust</div>
+        <div class="small">
+          We focus on quality delivery, clear communication, and operational excellence across every business line.
+        </div>
+      </div>
+    </div>
+
+    <div class="card card-pad">
+      <div class="stack">
+        <div style="font-weight:700; color: var(--primary); font-size: var(--text-sm);">Our Values</div>
+        <ul class="small" style="margin: 0; padding-left: 0;">
+          <li>• Trust & professionalism</li>
+          <li>• Quality service delivery</li>
+          <li>• People-first support</li>
+          <li>• Compliance and accountability</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="padding-top: var(--s-10);">
+  <div class="card card-pad">
+    <div class="grid-2" style="align-items: start;">
+      <div class="stack">
+        <div style="font-weight:700; color: var(--primary); font-size: var(--text-sm);">UK Credibility</div>
+        <div style="font-weight:700;">Subsidiary of JUSTINTIME Group (UK)</div>
+        <div class="small">
+          We operate with strong governance standards and emphasize credibility, transparency, and long-term partnerships.
+        </div>
+      </div>
+
+      <div class="stack">
+        <div class="card" style="border-radius: var(--r-md); background: rgba(18,104,176,0.08); border-color: transparent; box-shadow: none;">
+          <div class="card-pad" style="padding: var(--s-6);">
+            <div style="font-weight:700; color: var(--primary); font-size: var(--text-sm);">What you can expect</div>
+            <div class="small">• Clear processes</div>
+            <div class="small">• Professional communication</div>
+            <div class="small">• Reliable delivery</div>
+          </div>
+        </div>
+
+        <div style="display:flex; gap: 12px; flex-wrap: wrap;">
+          <a class="btn btn--primary" href="/contact/">Contact us</a>
+          <a class="btn btn--outline" href="/services/">Explore services</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

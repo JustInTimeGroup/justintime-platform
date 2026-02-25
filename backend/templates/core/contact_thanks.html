@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title %}Thanks | Justintime Group{% endblock %}
+
+{% block content %}
+<section class="card card-pad" style="max-width: 720px; margin: 0 auto;">
+  <div class="stack">
+    <div style="display:flex; align-items:center; gap: 12px;">
+      <div style="width:44px; height:44px; border-radius: var(--r-md); background: rgba(18,104,176,0.10); color: var(--primary); display:flex; align-items:center; justify-content:center; font-weight: 800;">
+        ✓
+      </div>
+      <div>
+        <h1 class="h1" style="font-size: var(--text-2xl); margin: 0;">Thanks — we received your message</h1>
+        <p class="small" style="margin: 0;">Our team will review your enquiry and respond as soon as possible.</p>
+      </div>
+    </div>
+
+    <div class="card" style="border-radius: var(--r-md); background: rgba(250,182,21,0.20); border-color: transparent; box-shadow: none;">
+      <div class="card-pad" style="padding: var(--s-6);">
+        <div style="font-weight: 700; font-size: var(--text-sm);">Tip</div>
+        <div class="small">If it’s urgent, include a phone number in your next message for faster follow-up.</div>
+      </div>
+    </div>
+
+    <div style="display:flex; gap: 12px; flex-wrap: wrap;">
+      <a class="btn btn--primary" href="/">Back to home</a>
+      <a class="btn btn--outline" href="/services/">Explore services</a>
+    </div>
+  </div>
+</section>
+{% endblock %}
